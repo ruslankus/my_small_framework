@@ -2,9 +2,16 @@
 
 require __DIR__ . "/autoload.php";
 
-$res = \App\Models\User::findAll();
+use App\Model;
+use App\Models\User;
 
-$res;
+$user = new User();
+
+$user->name = "Vasia";
+$user->email = "test@email.com";
+$user->id = 8;
+
+$user->insert();
 
 
 

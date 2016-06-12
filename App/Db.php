@@ -5,6 +5,9 @@ namespace App;
 
 class Db
 {
+
+    use Singleton;
+
     protected $_dbName =  'myframe';
     protected $_dbUser = 'root';
     protected $_dbPass = 'mysql';
@@ -12,16 +15,16 @@ class Db
 
     protected $dbh;
 
-    function __construct()
+    protected function __construct()
     {
         $this->dbh = new \PDO("mysql:host={$this->_dbHost};dbname={$this->_dbName}", $this->_dbUser, $this->_dbPass);
     }
 
 
-    public function execute($sql)
+    public function execute($sql, $params = [])
     {
         $sth = $this->dbh->prepare($sql);
-        $res = $sth->execute();
+        $res = $sth->execute($params);
         return $res;
     }
 
