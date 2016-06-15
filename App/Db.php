@@ -17,7 +17,10 @@ class Db
 
     protected function __construct()
     {
-        $this->dbh = new \PDO("mysql:host={$this->_dbHost};dbname={$this->_dbName}", $this->_dbUser, $this->_dbPass);
+        $dbh = new \PDO("mysql:host={$this->_dbHost};dbname={$this->_dbName}", $this->_dbUser, $this->_dbPass,
+            [ \PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"]);
+
+        $this->dbh = $dbh;
     }
 
 
@@ -29,9 +32,9 @@ class Db
     }
 
 
-    public function query($sql, $class){
+    public function query($sql,$params,$class){
         $sth = $this->dbh->prepare($sql);
-        $res = $sth->execute();
+        $res = $sth->execute($params);
         if(false !== $res){
             return $sth->fetchAll(\PDO::FETCH_CLASS, $class);
         }

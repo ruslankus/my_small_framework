@@ -17,22 +17,18 @@
     <![endif]-->
 </head>
 <body>
-<h1>Hello, world!</h1>
+<h1>One news</h1>
 <?php //$users = $this->users;?>
-<?php if(!empty($news)): ?>
-    <?php foreach ($news as $article):?>
-        <div class="panel panel-default">
-            <div class="panel-heading"><?= $article->title;?></div>
-            <div class="panel-body">
-                <?php if(!empty($article->author)): ?>
-                Автор: <?= $article->author->name ?>
-                <?php endif; ?>
-            </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading"><?= $article->title;?></div>
+        <div class="panel-body">
+            <?php if(!empty($article->author)): ?>
+            Автор: <?= $article->author->name ?>
+            <?php endif; ?>
         </div>
-    <?php endforeach; ?>
-<?php endif;?>
-
-
+    </div>
+   
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
