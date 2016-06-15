@@ -2,17 +2,14 @@
 
 require __DIR__ . "/autoload.php";
 
-use App\Model;
 use App\Models\User;
 
-$user = new User();
+$users = User::findAll();
 
-$user->name = "Vasia";
-$user->email = "test@email.com";
-$user->id = 8;
+$view = new \App\View();
 
-$user->insert();
-
+$view->users = $users;
+echo $view->render(__DIR__ ."/App/templates/index.php");
 
 
 
