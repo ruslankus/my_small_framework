@@ -3,25 +3,13 @@
 namespace App\Controllers;
 
 
+use App\Controller;
 use App\View;
 use App\Models\News as ModelNews;
 
-class News
+class News extends Controller
 {
 
-    protected $view;
-
-    public function __construct()
-    {
-        $this->view = new View();
-    }
-    
-    public function action($name)
-    {
-        $actionName = "action{$name}";
-        $this->$actionName();
-    }
-    
 
     protected function actionIndex()
     {
@@ -34,10 +22,16 @@ class News
     
     
     protected function actionOne()
-    {
+    {   
+        
+        
         $id = (int)$_GET['id'];
         $this->view->article = ModelNews::findById($id);
 
         $this->view->display('App/templates/one.php');
     }
+
+
+    
+    
 }
