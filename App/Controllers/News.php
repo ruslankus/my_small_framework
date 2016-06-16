@@ -32,6 +32,11 @@ class News extends Controller
     }
 
 
-    
-    
+    protected function beforeAction()
+    {
+        $ex = new \Exception("Exception message");
+        throw $ex;
+    }
+
+
 }

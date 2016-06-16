@@ -14,8 +14,14 @@ $controller = new  $fullName;
 
 $action = !empty($parsed[1]) ? ucfirst($parsed[1]): "Index";
 
-$controller->action($action);
+try {
 
+    $controller->action($action);
+
+} catch (Exception $e){
+
+    echo "Exception " . $e->getMessage();
+}
 
 
 
