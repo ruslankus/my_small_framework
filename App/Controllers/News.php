@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 
 use App\Controller;
+use App\Exceptions\Core;
 use App\View;
 use App\Models\News as ModelNews;
 
@@ -34,8 +35,7 @@ class News extends Controller
 
     protected function beforeAction()
     {
-        $ex = new \Exception("Exception message");
-        throw $ex;
+        
     }
 
 

@@ -2,6 +2,15 @@
 error_reporting(E_ALL);
 require __DIR__ . "/autoload.php";
 
+
+$col = new \App\Collections();
+$col[] = 1;
+$col[] = 2;
+$col[] = 3;
+
+
+die();
+
 $url = trim($_SERVER['REQUEST_URI'], '/');
 
 $url = stristr($url, '?', true);
@@ -18,9 +27,13 @@ try {
 
     $controller->action($action);
 
-} catch (Exception $e){
+} catch (\App\Exceptions\Core $e){
 
-    echo "Exception " . $e->getMessage();
+    echo "Exception Core was thrown " . $e->getMessage();
+
+}catch (\App\Exceptions\Db $e) {
+    echo "Data base problem, error code - " . $e->getCode()
+        . ", error message - " . $e->getMessage();
 }
 
 

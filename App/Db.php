@@ -8,7 +8,7 @@ class Db
 
     use Singleton;
 
-    protected $_dbName =  'myframe';
+    protected $_dbName =  'myframe11';
     protected $_dbUser = 'root';
     protected $_dbPass = 'mysql';
     protected $_dbHost = '127.0.0.1';
@@ -17,10 +17,15 @@ class Db
 
     protected function __construct()
     {
-        $dbh = new \PDO("mysql:host={$this->_dbHost};dbname={$this->_dbName}", $this->_dbUser, $this->_dbPass,
-            [ \PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"]);
+        try {
+            $dbh = new \PDO("mysql:host={$this->_dbHost};dbname={$this->_dbName}", $this->_dbUser, $this->_dbPass,
+                [\PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"]);
 
-        $this->dbh = $dbh;
+            $this->dbh = $dbh;
+        } catch (\PDOException $e){
+           throw new \App\Exceptions\Db($e->getMessage(),$e->getCode());
+           die();
+        }
     }
 
 
