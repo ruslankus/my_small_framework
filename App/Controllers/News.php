@@ -5,6 +5,7 @@ namespace App\Controllers;
 
 use App\Controller;
 use App\Exceptions\Core;
+use App\MultiException;
 use App\View;
 use App\Models\News as ModelNews;
 
@@ -18,7 +19,7 @@ class News extends Controller
         $this->view->title = "My site";
         $this->view->news = ModelNews::findAll();
 
-        $this->view->display('App/templates/index.php');
+        $this->view->display(__DIR__ .'/../templates/index.php');
     }
     
     
@@ -29,13 +30,21 @@ class News extends Controller
         $id = (int)$_GET['id'];
         $this->view->article = ModelNews::findById($id);
 
-        $this->view->display('App/templates/one.php');
+        $this->view->display(__DIR__ . '/../templates/one.php');
     }
 
 
-    protected function beforeAction()
+    protected  function actionCreate()
     {
-        
+        try {
+            $article = new ModelNews();
+            $article->fill([]);
+            $article->save();
+        }catch (MultiException $e){
+            $this->view->errors = $e;
+        }
+
+        $this->view->display(__DIR__ . '/../templates/create.php');
     }
 
 

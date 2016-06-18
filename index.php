@@ -2,18 +2,11 @@
 error_reporting(E_ALL);
 require __DIR__ . "/autoload.php";
 
-
-$col = new \App\Collections();
-$col[] = 1;
-$col[] = 2;
-$col[] = 3;
-
-
-die();
-
 $url = trim($_SERVER['REQUEST_URI'], '/');
 
-$url = stristr($url, '?', true);
+if(strpos($url,'?')) {
+    $url = stristr($url, '?');
+}
 $parsed = explode('/', $url);
 
 $controllerName = !(empty($parsed[0])) ? ucfirst($parsed[0]) : 'News';

@@ -9,7 +9,7 @@
 
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
-        integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+          integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -18,15 +18,27 @@
     <![endif]-->
 </head>
 <body>
-<h1>Hello, world!</h1>
+
+<?php if(!empty($errors)): ?>
+
+    <?php foreach ($errors as $error): ?>
+        <div class="alert alert-danger">
+            <?= $error->getMessage(); ?>
+        </div>
+    <?php endforeach; ?>
+
+<?php endif; ?>
+
+
+<h1>Create!</h1>
 <?php //$users = $this->users;?>
-<?php if(!empty($this->news)): ?>
-    <?php foreach ($this->news as $article):?>
+<?php if(!empty($news)): ?>
+    <?php foreach ($news as $article):?>
         <div class="panel panel-default">
             <div class="panel-heading"><?= $article->title;?></div>
             <div class="panel-body">
                 <?php if(!empty($article->author)): ?>
-                Автор: <?= $article->author->name ?>
+                    Автор: <?= $article->author->name ?>
                 <?php endif; ?>
             </div>
         </div>

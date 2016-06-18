@@ -4,6 +4,7 @@ namespace App\Models;
 
 
 use App\Model;
+use App\MultiException;
 
 class News extends Model
 {
@@ -49,6 +50,20 @@ class News extends Model
             default:
 
                 return false;
+        }
+    }
+
+
+
+    public function fill()
+    {
+        $multi = new MultiException();
+        $multi[] = new \Exception("Wrong title");
+        $multi[] = new \Exception('Wrong title');
+
+        $count = count($multi);
+        if($count > 0){
+            throw $multi;
         }
     }
 

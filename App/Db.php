@@ -8,7 +8,7 @@ class Db
 
     use Singleton;
 
-    protected $_dbName =  'myframe11';
+    protected $_dbName =  'myframe';
     protected $_dbUser = 'root';
     protected $_dbPass = 'mysql';
     protected $_dbHost = '127.0.0.1';

@@ -45,7 +45,9 @@ class View implements \Countable
         
         foreach ($this->data as $prop => $value)
         {
+
             $$prop = $value;
+            $data[$prop] = $value;
         }
         
         include $template;
