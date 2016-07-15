@@ -19,14 +19,14 @@ class News extends Controller
         $this->view->title = "My site";
         $this->view->news = ModelNews::findAll();
 
-        $this->view->display(__DIR__ .'/../templates/index.php');
+        $this->view->display(__DIR__ . '/../templates/index.php');
     }
-    
-    
+
+
     protected function actionOne()
-    {   
-        
-        
+    {
+
+
         $id = (int)$_GET['id'];
         $this->view->article = ModelNews::findById($id);
 
@@ -34,13 +34,13 @@ class News extends Controller
     }
 
 
-    protected  function actionCreate()
+    protected function actionCreate()
     {
         try {
             $article = new ModelNews();
             $article->fill([]);
             $article->save();
-        }catch (MultiException $e){
+        } catch (MultiException $e) {
             $this->view->errors = $e;
         }
 

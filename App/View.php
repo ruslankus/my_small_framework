@@ -13,7 +13,7 @@ class View implements \Countable
 {
     protected $data = [];
 
-    public function __set($k,$v)
+    public function __set($k, $v)
     {
         $this->data[$k] = $v;
     }
@@ -23,10 +23,11 @@ class View implements \Countable
     {
         return $this->data[$k];
     }
-    
-    public function __isset($k){
-        return !empty($this->data[$k])? $this->data[$k] : null;
-    } 
+
+    public function __isset($k)
+    {
+        return !empty($this->data[$k]) ? $this->data[$k] : null;
+    }
 
 
     public function display($template)
@@ -42,14 +43,13 @@ class View implements \Countable
     public function render($template)
     {
         ob_start();
-        
-        foreach ($this->data as $prop => $value)
-        {
+
+        foreach ($this->data as $prop => $value) {
 
             $$prop = $value;
             $data[$prop] = $value;
         }
-        
+
         include $template;
         $content = ob_get_contents();
         ob_end_clean();

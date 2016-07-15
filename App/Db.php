@@ -8,7 +8,7 @@ class Db
 
     use Singleton;
 
-    protected $_dbName =  'myframe';
+    protected $_dbName = 'myframe';
     protected $_dbUser = 'root';
     protected $_dbPass = 'mysql';
     protected $_dbHost = '127.0.0.1';
@@ -22,9 +22,9 @@ class Db
                 [\PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"]);
 
             $this->dbh = $dbh;
-        } catch (\PDOException $e){
-           throw new \App\Exceptions\Db($e->getMessage(),$e->getCode());
-           die();
+        } catch (\PDOException $e) {
+            throw new \App\Exceptions\Db($e->getMessage(), $e->getCode());
+            die();
         }
     }
 
@@ -37,10 +37,11 @@ class Db
     }
 
 
-    public function query($sql,$params,$class){
+    public function query($sql, $params, $class)
+    {
         $sth = $this->dbh->prepare($sql);
         $res = $sth->execute($params);
-        if(false !== $res){
+        if (false !== $res) {
             return $sth->fetchAll(\PDO::FETCH_CLASS, $class);
         }
 

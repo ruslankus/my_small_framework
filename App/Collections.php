@@ -12,6 +12,5 @@ class Collections implements \ArrayAccess , \Iterator
 {
 
     use TCollection;
-
     
 }

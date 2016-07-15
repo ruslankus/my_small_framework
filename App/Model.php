@@ -15,7 +15,7 @@ abstract class Model
     {
         $db = Db::instance();
         return $db->query(
-            "SELECT * FROM " . static::TABLE,[], static::class
+            "SELECT * FROM " . static::TABLE, [], static::class
         );
     }
 
@@ -24,7 +24,7 @@ abstract class Model
     {
         $db = Db::instance();
         $data = $db->query(
-            "SELECT * FROM " . static::TABLE . " WHERE id= :id",[':id' => (int)$id] ,static::class
+            "SELECT * FROM " . static::TABLE . " WHERE id= :id", [':id' => (int)$id], static::class
         );
 
         return array_shift($data);
@@ -42,21 +42,19 @@ abstract class Model
         $columns = [];
         $values = [];
 
-        if($this->isNew())
-        {
+        if ($this->isNew()) {
             return;
         }
-        
-        foreach ($this as $k => $v)
-        {
-            if("id" == $k){
+
+        foreach ($this as $k => $v) {
+            if ("id" == $k) {
                 continue;
             }
             $columns[] = $k;
             $values[":{$k}"] = $v;
 
-            $sql = "INSERT INTO ". static::TABLE  . " (". implode(', ' , $columns) .") "
-                ."VALUES(". implode(', ', array_keys($values)) .")";
+            $sql = "INSERT INTO " . static::TABLE . " (" . implode(', ', $columns) . ") "
+                . "VALUES(" . implode(', ', array_keys($values)) . ")";
         }
 
         $res = Db::instance()->execute($sql, $values);
